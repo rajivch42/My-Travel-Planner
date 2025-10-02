@@ -1,4 +1,7 @@
 {
+  "engines":{
+    "node": "22.12.0"
+  },
   "name": "itternary-project",
   "version": "1.0.0",
   "main": "app.js",
@@ -12,6 +15,7 @@
   "dependencies": {
     "@googlemaps/google-maps-services-js": "^3.4.2",
     "connect-flash": "^0.1.1",
+    "connect-mongo": "^5.1.0",
     "dotenv": "^17.2.2",
     "ejs": "^3.1.10",
     "express": "^5.1.0",

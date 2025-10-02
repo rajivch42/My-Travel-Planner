@@ -2,6 +2,7 @@ require('dotenv').config()
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
+const MongoStore = require('connect-mongo');
 const session = require('express-session');
 const methodOverride = require('method-override');
 const flash = require("connect-flash");
@@ -9,13 +10,11 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local'); 
 const expressError = require("./utility/expError.js")
 const path = require('path');
-const {isLoggedIn} = require("./middleware.js");
 const User = require('./models/user');
 const Trip = require('./models/trip'); 
 const userRoutes = require('./controllers/user.js');
 const tripRoutes = require('./controllers/trip.js');
 const apiRoutes = require('./controllers/api.js');
-const { v4: uuidv4 } = require('uuid');
 //connect
 const dbUrl = process.env.ATLASDB_URL;
 
@@ -28,6 +27,16 @@ app.set('views', path.join(__dirname, '/views'));
 //public
 app.use(express.static(path.join(__dirname, 'public'))); 
 app.use(methodOverride('_method'));
+const store = MongoStore.create({
+    mongoUrl:dbUrl,
+    crypto:{
+        secret:process.env.SECRET,
+    },
+    touchAfter:24*60*60,
+})
+store.on("error",() => {
+    console.log("ERROR IN MONGO SESSION",err);
+})
 //parse 
 app.use(express.urlencoded({ extended: true })); 
 app.use(express.json()); 
@@ -68,6 +77,6 @@ app.use((err,req,res,next) => {
     res.status(status).render("error",{message});
 });
 
-app.listen(port, () => {
-  console.log(`🚀 Server listening on http://localhost:${port}`);
+app.listen(3000, () => {
+  console.log(`🚀 Server listening on http://localhost:${3000}`);
 });
