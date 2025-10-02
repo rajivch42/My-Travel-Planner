@@ -1,0 +1,62 @@
+<%- include('partials/header') %>
+
+<div class="share-page-container">
+    <div class="share-page-wrapper">
+        <header class="share-header">
+            <h1>Trip to <%= trip.destination %></h1>
+            <p><%= trip.startDate.toLocaleDateString() %> - <%= trip.endDate.toLocaleDateString() %></p>
+        </header>
+
+        <main class="share-content">
+            <% trip.itinerary.forEach((day) => { %>
+                <section class="day-plan">
+                    <div class="day-header">
+                        <h2><%= day.title %></h2>
+                        <p><%= day.dayDate.toDateString() %></p>
+                    </div>
+                    
+                    <div class="day-places">
+                        <% if (day.places.length > 0) { %>
+                            <% day.places.forEach((place, i) => { %>
+                                <div class="place-card-share">
+                                    <div class="place-thumbnail">
+                                        <img src="<%= place.photoUrl %>" alt="<%= place.name %>">
+                                    </div>
+                                    
+                                    <div class="place-details">
+                                        <h3 class="place-name"><%= place.name %></h3>
+                                        <p class="place-address"><%= place.address %></p>
+                                        
+                                        <div class="place-meta">
+                                            <span class="meta-item">
+                                                <span class="meta-icon">🕒</span>
+                                                <%= place.scheduledTime || 'No time set' %>
+                                            </span>
+                                            <span class="meta-item">
+                                                <span class="meta-icon">💰</span>
+                                                ₹<%= place.cost || 0 %>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    
+                                    <a href="https://www.google.com/maps?q=<%= place.lat %>,<%= place.lng %>" 
+                                       class="btn-map-share" 
+                                       target="_blank"
+                                       rel="noopener noreferrer"
+                                       title="View on map">
+                                    </a>
+                                </div>
+                            <% }); %>
+                        <% } else { %>
+                            <div class="no-places-message">
+                                <p>No plans for this day yet.</p>
+                            </div>
+                        <% } %>
+                    </div>
+                </section>
+            <% }); %>
+        </main>
+    </div>
+</div>
+
+<%- include('partials/footer') %>

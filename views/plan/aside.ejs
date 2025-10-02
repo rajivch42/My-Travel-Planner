@@ -1,0 +1,14 @@
+<aside class="planner-sidebar">
+        <div class="sidebar-header">
+            <h3><%= trip.destination %></h3>
+            <p><%= trip.startDate.toLocaleDateString() %> - <%= trip.endDate.toLocaleDateString() %></p>
+        </div>
+        <nav class="sidebar-nav">
+            <button class="sidebar-link " data-view="overview">Overview</button>
+            <button class="sidebar-link " data-view="itinerary">Itinerary</button>
+            <button class="sidebar-link" data-view="budget">Budget</button>
+        </nav>
+        <div class="sidebar-footer">
+            <button type="button" id="share-plan-btn" class="btn btn-secondary">Share Plan</button>
+        </div>
+</aside>

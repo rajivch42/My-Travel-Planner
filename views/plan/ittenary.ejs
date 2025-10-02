@@ -1,0 +1,58 @@
+<div id="itinerary-view" class="planner-view ">
+    
+                <% trip.itinerary.forEach((day) => { %>
+                    <section class="day-plan">
+                        <div class="day-header">
+                            <div class="day-header-title">
+                                <h2><%= day.title %></h2>
+                                <p><%= day.dayDate.toDateString() %></p>
+                            </div>
+                            <button class="btn btn-secondary btn-add-place-to-day" data-day-id="<%= day._id %>">
+                                + Add Place
+                            </button>
+                        </div>
+                        <div class="day-places" data-day-id="<%= day._id %>">
+                            <% if (day.places.length > 0) { %>
+                                <% day.places.forEach((place, i) => { %>
+                                    <div class="place-card-simple" id="place-<%= place._id %>" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('<%= place.photoUrl %>');">
+                                        <div class="place-number"><%= i + 1 %></div>
+                                        <div class="place-details">
+                                            <p><%= place.name %></p>
+                                            <small><%= place.address %></small>
+                                            <div class="place-meta">
+                                                <span class="meta-item" id="time-<%= place._id %>">🕒 <%= place.scheduledTime || 'No time' %></span>
+                                                <span class="meta-item" id="cost-<%= place._id %>">💰 ₹<%= place.cost || 0 %></span>
+                                            </div>
+                                        </div>
+                                        <div class="place-card-actions">
+                                            <a href="https://www.google.com/maps?q=<%= place.lat %>,<%= place.lng %>" 
+                                                class="btn-map" 
+                                                target="_blank"
+                                                rel="noopener noreferrer">
+                                                    <span class="material-symbols-outlined">map</span>
+                                            </a>
+                                            <button class="btn-edit-place" 
+                                                    data-place-id="<%= place._id %>"
+                                                    data-day-id="<%= day._id %>"
+                                                    data-time="<%= place.scheduledTime || '' %>"
+                                                    data-cost="<%= place.cost || 0 %>">
+                                                <span class="material-symbols-outlined">edit</span>
+                                            </button>
+                                            <!-- THIS IS THE NEW DELETE BUTTON -->
+                                            <button class="btn-delete-place"
+                                                    data-place-id="<%= place._id %>"
+                                                    data-day-id="<%= day._id %>">
+                                                <span class="material-symbols-outlined">delete</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                <% }); %>
+                            <% } else { %>
+                                <div class="no-places-message" data-day-id="<%= day._id %>">
+                                    <p>No plans for this day yet.</p>
+                                </div>
+                            <% } %>
+                        </div>
+                    </section>
+                <% }); %>
+            </div>

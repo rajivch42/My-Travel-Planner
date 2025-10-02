@@ -1,0 +1,37 @@
+<%- include('partials/header') %>
+
+<div class="container">
+    <div class="dashboard-header">
+        <h1>Welcome back, <%= user.username %>!</h1>
+        <a href="/new-trip" class="btn btn-primary">Start a New Plan</a>
+    </div>
+
+    <div class="trips-section">
+        <h2>My Trips</h2>
+
+        <% if (trips.length > 0) { %>
+            <div class="trips-grid">
+                <% trips.forEach(trip => { %>
+                    <div class="trip-card">
+                        <div class="trip-card-image">
+                            <!-- Placeholder image. We'll add real ones later. -->
+                            <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=800" alt="Travel scene">
+                        </div>
+                        <div class="trip-card-content">
+                            <h3><%= trip.destination %></h3>
+                            <p><%= trip.startDate.toDateString() %> - <%= trip.endDate.toDateString() %></p>
+                            <a href="/planner/<%= trip._id %>" class="btn btn-secondary">View Plan</a>
+                        </div>
+                    </div>
+                <% }); %>
+            </div>
+        <% } else { %>
+            <div class="no-trips-message">
+                <p>You have no trips planned yet. Let's create one!</p>
+                <a href="/new-trip" class="btn btn-primary">Plan Your First Trip</a>
+            </div>
+        <% } %>
+    </div>
+</div>
+
+<%- include('partials/footer') %>

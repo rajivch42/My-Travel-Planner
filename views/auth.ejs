@@ -1,0 +1,103 @@
+<%- include('partials/header') %>
+
+<main class="auth-container">
+
+    <!-- COLUMN 1: IMAGE -->
+    <section class="auth-image-side">
+    </section>
+
+    <!-- COLUMN 2: FORM -->
+    <section class="auth-form-side">
+
+        <!-- TABS TO TOGGLE -->
+        <div class="auth-tabs">
+            <button id="tab-login" class="active">Log In</button>
+            <button id="tab-signup">Sign Up</button>
+        </div>
+
+        <!-- ========= LOGIN FORM ========= -->
+        <form id="login-form" action="/login" method="POST" class="auth-form active">
+            <h2>Welcome Back!</h2>
+            <p class="form-intro">Let's get you planning your next adventure.</p>
+
+            <div class="form-group">
+                <label for="login-username">Username</label>
+                <input type="text" id="login-username" name="username" placeholder="Enter your username" required>
+            </div>
+
+            <div class="form-group">
+                <label for="login-password">Password</label>
+                <input type="password" id="login-password" name="password" placeholder="Enter your password" required>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Log In</button>
+
+            <div class="divider">or</div>
+            <a href="/auth/google" class="btn btn-social">
+                <!-- The src attribute now points to your saved image file -->
+                Continue with Google
+            </a>
+
+        </form>
+
+        <!-- ========= SIGN UP FORM ========= -->
+        <form id="signup-form" action="/signup" method="POST" class="auth-form">
+            <h2>Create Your Account</h2>
+            <p class="form-intro">Start planning your dream trips today. It's free!</p>
+
+            <div class="form-group">
+                <label for="signup-username">Username</label>
+                <input type="text" id="signup-username" name="username" placeholder="Pick a unique username" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="signup-email">Email</label>
+                <input type="email" id="signup-email" name="email" placeholder="you@example.com" required>
+            </div>
+
+            <div class="form-group">
+                <label for="signup-password">Password</label>
+                <input type="password" id="signup-password" name="password" placeholder="Create a strong password" required>
+            </div>
+            
+             <div class="form-group">
+                <label for="signup-confirm-password">Confirm Password</label>
+                <input type="password" id="signup-confirm-password" name="confirmPassword" placeholder="Repeat your password" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Create Account</button>
+            
+             <div class="divider">or</div>
+             <a href="/auth/google" class="btn btn-social">
+                <img src="data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDQ4IDQ4Ij48ZGVmcz48cGF0aCBpZD0iWEpHTlMiIGQ9Ik00My42MTEgMjAuMDgzSDQyVjIwaDI0djEyaC0xLjgwOWwtLjAxLTBjLTEuMjQxIDMuNzkxLTMuOTM4IDYuNjM4LTcuNzQyIDguMDkydjMuOTA4aC0yLjIyMmwtLjAxMi0uMDA0LTMuODE1LTMuMDM2LTMuNzY0IDMuMDM0di4wMDRoLTIuMjIydi0zLjkxYy0zLjgxMy0xLjQ0OC02LjUxLTQuMzAzLTcuNzUxLTguMDkzbC0uMDE0LT4wMDNoLS4wMDNWMjBILjAxMUwyNCA0bDI0IDE2IiBmaWxsPSIjRkZGIi8+PC9kZWZzPjxjbGlwUGF0aCBpZD0iTUpQSWUiPjx1c2UgeGxpbms6aHJlZj0iI1hKR05TIgb3ZlcmZsb3c9InZpc2libGUiLz48L2NsaXBQYXRoPjxwYXRoIHN0cm9rZT0ibm9uZSIgZmlsbD0iI0VBNDMzNSIgZD0iTTAgMzZWMThMMC4wMTEgMThDMi4yNTkgMTEuMjQgOC4wMSAyIDguMDEgMlMxNy4wMTYgMS45ODIgMjQgNGwyNCAxNnYxMiIvPjxwYXRoIHN0cm9rZT0ibm9uZSIgZmlsbD0iIzQyODVGNCIgZD0iTTQ4IDE4djEySDE4LjQ5bC4wMTgtLjAwNkMxOS44MTcgMjkuMDQyIDIyLjYyNyAzMCAyNiAzMGwyMS45ODktLjAyMkw0OCAxOEwxNi4wMTYgMTcuOTgyIDI0IDRjMi4wMDkgMS4wOCA0IDEuOSA2IDIiLz48cGF0aCBzdHJva2U9Im5vbmUiIGZpbGw9IiMzNEE4NTMiIGQ9Ik0wIDM2bDMuNTctNC4yOVYyNEgwdi02LjAyM0wwIDE4bDE4LjQ5IDIuMDA2TDE4LjQ5IDIwSDE4VjMwbDcuNzQtOC4wOTNWNDRIMjR2NEwwIDM2Ii8+PHBhdGggc3Ryb2tlPSJub25lIiBmaWxsPSIjRkJCQzA1CIgZD0iTTQ4IDQybC02LTE4SDIivPjwvc3ZnPg==" alt="Google icon">
+                Sign up with Google
+            </a>
+
+        </form>
+
+    </section>
+
+</main>
+
+<script>
+    const tabLogin = document.getElementById('tab-login');
+    const tabSignup = document.getElementById('tab-signup');
+    const formLogin = document.getElementById('login-form');
+    const formSignup = document.getElementById('signup-form');
+
+    tabLogin.addEventListener('click', () => {
+        tabLogin.classList.add('active');
+        tabSignup.classList.remove('active');
+        formLogin.classList.add('active');
+        formSignup.classList.remove('active');
+    });
+
+    tabSignup.addEventListener('click', () => {
+        tabSignup.classList.add('active');
+        tabLogin.classList.remove('active');
+        formSignup.classList.add('active');
+        formLogin.classList.remove('active');
+    });
+</script>
+
+<%- include('partials/footer') %>

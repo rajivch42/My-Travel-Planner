@@ -1,0 +1,34 @@
+<%- include('partials/header') %>
+
+<!-- This data- attribute is crucial for passing the tripId to our external JS file -->
+<div class="planner-wrapper" data-trip-id="<%= trip._id %>">
+
+    <!-- The Sidebar is now included from its own file -->
+    <%- include('plan/aside') %>
+
+    <!-- Main Content Area -->
+    <main class="planner-content">
+        <div id="flash-message-container"></div>
+        <header class="content-header">
+            <h1 id="planner-header">Overview & Notes</h1>
+        </header>
+
+        <!-- The Container for all the different views -->
+        <div class="planner-views-container">
+            <!-- These are the corrected include paths for your partials -->
+            <%- include('plan/ittenary') %>
+            <%- include('plan/overview') %>
+            <%- include('plan/budget') %>
+        </div>
+    </main>
+
+</div>
+
+<!-- Include all the modals from their own file -->
+<%- include('plan/modal') %>
+
+<!-- Link to your new, external JavaScript file with the 'defer' attribute -->
+<script src="/js/planner.js" defer></script>
+
+<%- include('partials/footer') %>
+

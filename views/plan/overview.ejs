@@ -1,0 +1,40 @@
+<div id="overview-view" class="planner-view active">
+    <div class="overview-sub-nav">
+        <button class="sub-tab-btn " data-subview="explore-content">Explore</button>
+        <button class="sub-tab-btn" data-subview="notes-content">Notes</button>
+    </div>
+
+    <div id="explore-content" class="overview-sub-view">
+        <div class="search-container">
+             <h3>Search for specific places in <%= trip.destination %></h3>
+            <div class="search-form">
+                <input type="text" id="place-search-input" placeholder="e.g., Eiffel Tower, local markets...">
+                <button id="place-search-button" class="btn btn-primary">Search</button>
+            </div>
+        </div>
+        <div class="category-container">
+            <h3>...or explore by category</h3>
+            <div class="category-grid">
+                <button class="category-btn" data-query="restaurants">🍴 Restaurants</button>
+                <button class="category-btn" data-query="attractions">📍 Attractions</button>
+                <button class="category-btn" data-query="cafes">☕ Cafes</button>
+                <button class="category-btn" data-query="museums">🏛️ Museums</button>
+                <button class="category-btn" data-query="parks">🌳 Parks</button>
+                <button class="category-btn" data-query="hotels">🏨 Hotels</button>
+            </div>
+        </div>
+        <div id="search-results-container"></div>
+        <div id="load-more-container" style="display: none;">
+            <button id="load-more-btn" class="btn btn-secondary">Load More</button>
+        </div>
+    </div>
+
+    <div id="notes-content" class="overview-sub-view">
+        <div class="notes-container">
+            <h3>Trip Notes & Reservations</h3>
+            <p>Add flight details, confirmation codes, or general reminders here.</p>
+            <textarea id="trip-notes-textarea" placeholder="Start typing your notes..."><%= trip.overviewNotes || '' %></textarea>
+            <button id="save-notes-btn" class="btn btn-primary">Save Notes</button>
+        </div>
+    </div>
+</div>

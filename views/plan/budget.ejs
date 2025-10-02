@@ -1,0 +1,39 @@
+<div id="budget-view" class="planner-view">
+    <div class="budget-summary-card">
+        <h2>Total Planned Cost</h2>
+        <p class="total-cost-display">₹<%= totalCost.toLocaleString('en-IN') %></p>
+        <small>This is the sum of all cost entries from your itinerary.</small>
+    </div>
+
+    <!-- THIS IS THE NEW EXPENSE BREAKDOWN SECTION -->
+    <div class="expense-list-container">
+        <h3>Expense Breakdown</h3>
+        <div class="expense-list">
+            <% // Loop through each day in the itinerary %>
+            <% trip.itinerary.forEach(day => { %>
+                <% // Loop through each place within that day %>
+                <% day.places.forEach(place => { %>
+                    <% // Only display the place if it has a cost greater than 0 %>
+                    <% if (place.cost && place.cost > 0) { %>
+                        <div class="expense-item">
+                            <div class="expense-info">
+                                <span class="expense-day-title"><%= day.title %></span>
+                                <p class="expense-place-name"><%= place.name %></p>
+                            </div>
+                            <div class="expense-amount">
+                                <p>₹<%= place.cost.toLocaleString('en-IN') %></p>
+                            </div>
+                        </div>
+                    <% } %>
+                <% }); %>
+            <% }); %>
+
+            <% // Show a message if there are no expenses logged at all %>
+            <% if (totalCost === 0) { %>
+                <div class="no-expenses-message">
+                    <p>No expenses added yet. Edit items in your itinerary to add costs.</p>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</div>
