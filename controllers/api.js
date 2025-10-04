@@ -7,7 +7,8 @@ const { v4: uuidv4 } = require('uuid');
 
 router.get('/places/search', async (req, res) => {
     const { tripId, query, pagetoken } = req.query;
-
+    console.log(query);
+    console.log(pagetoken);
     if (!tripId) {
         return res.status(400).json({ message: "Trip ID is required." });
     }
@@ -50,6 +51,7 @@ router.get('/places/search', async (req, res) => {
             nextPageToken: placesResponse.data.next_page_token
         });
 
+        console.log(placesResponse.data.next_page_token);
     } catch (err) {
         console.error("API Search Error:", err);
         res.status(500).json({ message: "An error occurred while searching for places." });

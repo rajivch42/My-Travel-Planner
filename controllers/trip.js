@@ -71,7 +71,7 @@ router.post('/new-trip', isLoggedIn, async (req, res) => {
 // This route must be protected by your isLoggedIn middleware
 router.get('/planner/:tripId', isLoggedIn, async (req, res) => {
     try {
-        console.log("hi.......");
+        // console.log("hi.......");
         // Find the trip by its ID from the URL
         const trip = await Trip.findById(req.params.tripId);
 

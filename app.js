@@ -77,6 +77,7 @@ app.use((err,req,res,next) => {
     res.status(status).render("error",{message});
 });
 
-app.listen(3000, () => {
-  console.log(`🚀 Server listening on http://localhost:${3000}`);
-});
+// app.listen(3000, () => {
+//   console.log(`🚀 Server listening on http://localhost:${3000}`);
+// });
+module.exports = app;
