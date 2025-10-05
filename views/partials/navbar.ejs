@@ -1,7 +1,12 @@
-
 <nav class="main-nav">
     <div class="nav-content">
-        <a href="/" class="nav-logo">Travel Planner</a>
-        <a href="/logout" class="btn btn-secondary">Log Out</a>
+        <a href="/" class="nav-logo">
+            <%- include('_logo.ejs') %>
+            <span>Voyageur</span>
+        </a>
+        
+        <% if (currentUser) { %>
+            <a href="/logout" class="btn btn-secondary">Log Out</a>
+        <% } %>
     </div>
 </nav>

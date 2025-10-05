@@ -139,7 +139,7 @@ if (sidebarLinks.length) {
         // --- THIS IS THE UPDATED LOGIC ---
         // =========================================================================
         if (targetView === "overview") {
-            plannerHeader.textContent = "Overview & Notes";
+            
             if (overviewControls) overviewControls.classList.add('active');
 
             // If the user has NOT performed a search yet in this session...
@@ -158,9 +158,9 @@ if (sidebarLinks.length) {
             }
 
         } else if (targetView === "itinerary") {
-            plannerHeader.textContent = "Your Itinerary";
+            // plannerHeader.textContent = "Your Itinerary";
         } else if (targetView === "budget") {
-            plannerHeader.textContent = "Budget Tracker";
+            // plannerHeader.textContent = "Budget Tracker";
         }
     });
 });

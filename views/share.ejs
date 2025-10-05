@@ -4,23 +4,31 @@
     <div class="share-page-wrapper">
         <header class="share-header">
             <h1>Trip to <%= trip.destination %></h1>
-            <p><%= trip.startDate.toLocaleDateString() %> - <%= trip.endDate.toLocaleDateString() %></p>
+            <p class="trip-dates">
+                <%= trip.startDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) %> 
+                - 
+                <%= trip.endDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) %>
+            </p>
         </header>
 
         <main class="share-content">
-            <% trip.itinerary.forEach((day) => { %>
-                <section class="day-plan">
+            <% trip.itinerary.forEach((day, dayIndex) => { %>
+                <section class="day-section">
                     <div class="day-header">
-                        <h2><%= day.title %></h2>
-                        <p><%= day.dayDate.toDateString() %></p>
+                        <h2>Day <%= dayIndex + 1 %>: <%= day.title %></h2>
+                        <p class="day-date"><%= day.dayDate.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' }) %></p>
                     </div>
-                    
+
                     <div class="day-places">
-                        <% if (day.places.length > 0) { %>
-                            <% day.places.forEach((place, i) => { %>
+                        <% if (day.places && day.places.length > 0) { %>
+                            <% day.places.forEach((place, placeIndex) => { %>
                                 <div class="place-card-share">
+                                    <div class="place-number"><%= placeIndex + 1 %></div>
+                                    
                                     <div class="place-thumbnail">
-                                        <img src="<%= place.photoUrl %>" alt="<%= place.name %>">
+                                        <img src="<%= place.photoUrl || '/images/placeholder.jpg' %>" 
+                                             alt="<%= place.name %>" 
+                                             onerror="this.src='/images/placeholder.jpg'">
                                     </div>
                                     
                                     <div class="place-details">
@@ -30,7 +38,7 @@
                                         <div class="place-meta">
                                             <span class="meta-item">
                                                 <span class="meta-icon">🕒</span>
-                                                <%= place.scheduledTime || 'No time set' %>
+                                                <%= place.scheduledTime || 'Time not set' %>
                                             </span>
                                             <span class="meta-item">
                                                 <span class="meta-icon">💰</span>
@@ -43,18 +51,25 @@
                                        class="btn-map-share" 
                                        target="_blank"
                                        rel="noopener noreferrer"
-                                       title="View on map">
+                                       title="View on Google Maps">
+                                        <span class="map-icon">📍</span>
                                     </a>
                                 </div>
                             <% }); %>
                         <% } else { %>
                             <div class="no-places-message">
-                                <p>No plans for this day yet.</p>
+                                <p>No places added for this day yet.</p>
                             </div>
                         <% } %>
                     </div>
                 </section>
             <% }); %>
+
+            <% if (!trip.itinerary || trip.itinerary.length === 0) { %>
+                <div class="empty-itinerary">
+                    <p>No itinerary has been created for this trip yet.</p>
+                </div>
+            <% } %>
         </main>
     </div>
 </div>

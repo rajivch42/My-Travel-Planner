@@ -68,35 +68,41 @@ main {
 
 /* --- 3. NAVIGATION --- */
 .main-nav {
-  background-color: var(--bg-card);
-  box-shadow: var(--shadow-sm);
-  padding: 0 2rem;
-  width: 100%;
+  /* This makes the navbar stick to the top as you scroll */
   position: sticky;
   top: 0;
-  z-index: 100;
-  backdrop-filter: blur(10px);
-  background-color: rgba(255, 255, 255, 0.95);
+   z-index: 1;/* Ensures it stays on top of other content */
+  width: 100%;
+
+  /* The "Glassmorphism" effect */
+  background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+  backdrop-filter: blur(10px); /* This creates the blur */
+  
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  padding: 0.2rem;
 }
 
 .nav-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 1400px;
+  max-width: 1200px;
   margin: 0 auto;
   height: 70px;
 }
 
 .nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
   font-weight: 700;
   font-size: 1.5rem;
-  background: var(--primary-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--text-dark);
   text-decoration: none;
 }
-
+.nav-logo-svg {
+  color: var(--primary-color);
+}
 /* --- 4. BUTTONS --- */
 .btn {
   font-family: inherit;
@@ -480,32 +486,36 @@ main {
 
 /* --- PLANNER CONTENT (RIGHT SIDE) --- */
 .planner-content {
+  display: flex;
+  flex-direction: column;
   flex-grow: 1;
-  padding: 2.5rem 3rem;
-  overflow-y: auto;
-  overflow-x: hidden;
-  background-color: var(--bg-main);
-  max-width: calc(100% - var(--sidebar-width));
+  padding: 2rem 3rem;
+  overflow: hidden;/* This makes the entire content area scroll */
+  justify-content: flex-start;
+  align-items: stretch;
 }
 
 .content-header {
-  margin-bottom: 2rem;
-  padding-bottom: 1.5rem;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
   border-bottom: 2px solid var(--border-color);
+  flex-shrink: 0; /* Prevents the header from shrinking */
 }
 
 .content-header h1 {
   font-size: 2.5rem;
-  font-weight: 800;
   background: var(--primary-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
 }
+/* This container no longer needs to scroll */
 .planner-views-container {
-  /* Remove flex-grow: 1 and overflow-y: auto */
-  width: 100%;
+  flex-grow: 1; /* <-- FIX #2: Tells this container to fill all available vertical space */
+  overflow-y: auto; /* <-- FIX #3: Adds the scrollbar ONLY to this container */
+  padding-right: 1rem; /* Adds a small gap for the scrollbar */
 }
-
 /* --- 9. CATEGORY SELECTION --- */
 .category-container {
   margin-bottom: 2.5rem;
@@ -1174,135 +1184,326 @@ main {
 .simple-form .form-group {
   text-align: left;
 }
-
-/* --- 21. SHARE PAGE --- */
-/* In your public/css/style.css file */
+/* ========================================================================= */
+/* --- SHARE PAGE STYLES --- */
+/* ========================================================================= */
 
 .share-page-container {
+    min-height: 100vh;
     width: 100%;
-    padding: 2rem;
-    background-color: var(--bg-main);
-    /* position: absolute; has been removed as it was causing layout issues */
+    padding: 2rem 1rem;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
 }
 
 .share-page-wrapper {
-  max-width: 1000px;
-  margin: 0 auto;
-  background-color: var(--bg-card);
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-xl);
-  overflow: hidden;
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
 }
 
+/* --- HEADER SECTION --- */
 .share-header {
-  text-align: center;
-  padding: 3.5rem 2rem;
-  background: var(--primary-gradient);
-  color: white;
+    text-align: center;
+    padding: 3rem 2rem 2rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
 }
 
 .share-header h1 {
-  font-size: 3rem;
-  font-weight: 800;
-  margin-bottom: 0.75rem;
-  letter-spacing: -0.02em;
+    font-family: 'Georgia', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0 0 1rem;
+    line-height: 1.2;
 }
 
-.share-header p {
-  font-size: 1.2rem;
-  opacity: 0.95;
+.share-header .trip-dates {
+    font-size: 1.1rem;
+    opacity: 0.95;
+    margin: 0;
+    font-weight: 300;
 }
 
+/* --- CONTENT SECTION --- */
 .share-content {
-  padding: 3rem;
+    padding: 2rem;
 }
 
+/* --- DAY SECTION --- */
+.day-section {
+    margin-bottom: 3rem;
+}
+
+.day-section:last-child {
+    margin-bottom: 0;
+}
+
+.day-header {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.day-header h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #667eea;
+    margin: 0 0 0.5rem;
+}
+
+.day-header .day-date {
+    font-size: 1rem;
+    color: #666;
+    margin: 0;
+}
+
+/* --- PLACES CONTAINER --- */
+.day-places {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+/* --- PLACE CARD --- */
 .place-card-share {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  padding: 1.5rem;
-  border-radius: var(--radius-lg);
-  transition: all 0.3s ease;
-  border: 1px solid transparent;
-  margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.5rem 1rem;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background-color 0.2s ease;
+    position: relative;
 }
 
 .place-card-share:hover {
-  background-color: var(--bg-secondary);
-  border-color: var(--primary-light);
-  transform: translateX(8px);
+    background-color: #f8f9fa;
 }
 
+.place-card-share:last-child {
+    border-bottom: none;
+}
+
+/* Place Number Badge */
+.place-number {
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+}
+
+/* Place Thumbnail */
 .place-thumbnail {
-  width: 80px;
-  height: 80px;
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  flex-shrink: 0;
-  box-shadow: var(--shadow-md);
-  border: 3px solid white;
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+    overflow: hidden;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: #f0f0f0;
 }
 
 .place-thumbnail img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
-.place-card-share .place-details {
-  flex-grow: 1;
+/* Place Details */
+.place-details {
+    flex: 1;
+    min-width: 0;
 }
 
 .place-name {
-  font-size: 1.3rem;
-  font-weight: 700;
-  color: var(--text-dark);
-  margin: 0 0 0.25rem 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #2d3748;
+    margin: 0 0 0.5rem;
+    line-height: 1.3;
 }
 
 .place-address {
-  font-size: 0.95rem;
-  color: var(--text-medium);
-  margin: 0 0 0.75rem 0;
+    font-size: 0.95rem;
+    color: #718096;
+    margin: 0 0 0.75rem;
+    line-height: 1.4;
 }
 
-.place-card-share .place-meta {
-  margin: 0;
+/* Place Meta Information */
+.place-meta {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
 }
 
-.place-card-share .meta-item {
-  background-color: var(--bg-secondary);
-  color: var(--text-dark);
-  border: 1px solid var(--border-color);
-  backdrop-filter: none;
-  box-shadow: none;
+.meta-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.9rem;
+    color: #4a5568;
+    font-weight: 500;
 }
 
+.meta-icon {
+    font-size: 1rem;
+}
+
+/* Map Button */
 .btn-map-share {
-  flex-shrink: 0;
-  width: 48px;
-  height: 48px;
-  background: var(--accent-gradient);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(20, 184, 166, 0.3);
-  text-decoration: none;
-}
-
-.btn-map-share::before {
-  content: '🗺️';
-  font-size: 1.4rem;
+    width: 44px;
+    height: 44px;
+    background-color: #667eea;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
 }
 
 .btn-map-share:hover {
-  transform: scale(1.15) rotate(8deg);
-  box-shadow: 0 8px 24px rgba(20, 184, 166, 0.4);
+    background-color: #764ba2;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
 }
 
+.btn-map-share .map-icon {
+    font-size: 1.3rem;
+}
+
+/* --- EMPTY STATES --- */
+.no-places-message,
+.empty-itinerary {
+    text-align: center;
+    padding: 3rem 2rem;
+    color: #718096;
+}
+
+.no-places-message p,
+.empty-itinerary p {
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+/* --- RESPONSIVE DESIGN --- */
+@media (max-width: 768px) {
+    .share-page-container {
+        padding: 1rem 0.5rem;
+    }
+
+    .share-page-wrapper {
+        border-radius: 8px;
+    }
+
+    .share-header {
+        padding: 2rem 1.5rem 1.5rem;
+    }
+
+    .share-header h1 {
+        font-size: 2rem;
+    }
+
+    .share-header .trip-dates {
+        font-size: 1rem;
+    }
+
+    .share-content {
+        padding: 1.5rem 1rem;
+    }
+
+    .day-header h2 {
+        font-size: 1.5rem;
+    }
+
+    .place-card-share {
+        gap: 1rem;
+        padding: 1.25rem 0.75rem;
+    }
+
+    .place-number {
+        width: 28px;
+        height: 28px;
+        font-size: 0.85rem;
+    }
+
+    .place-thumbnail {
+        width: 60px;
+        height: 60px;
+    }
+
+    .place-name {
+        font-size: 1.1rem;
+    }
+
+    .place-address {
+        font-size: 0.85rem;
+    }
+
+    .place-meta {
+        gap: 1rem;
+    }
+
+    .meta-item {
+        font-size: 0.85rem;
+    }
+
+    .btn-map-share {
+        width: 40px;
+        height: 40px;
+    }
+
+    .btn-map-share .map-icon {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .share-header h1 {
+        font-size: 1.75rem;
+    }
+
+    .share-header .trip-dates {
+        font-size: 0.9rem;
+    }
+
+    .day-header h2 {
+        font-size: 1.3rem;
+    }
+
+    .place-card-share {
+        flex-wrap: wrap;
+        gap: 0.75rem;
+    }
+
+    .place-thumbnail {
+        width: 50px;
+        height: 50px;
+    }
+
+    .place-details {
+        flex: 1 1 calc(100% - 140px);
+    }
+
+    .btn-map-share {
+        position: absolute;
+        top: 1.25rem;
+        right: 0.75rem;
+    }
+}
 /* --- 22. VIEW CONTROLS --- */
 .view-controls {
   display: none;
