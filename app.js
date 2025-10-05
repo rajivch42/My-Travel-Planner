@@ -18,29 +18,9 @@ const apiRoutes = require('./controllers/api.js');
 //connect
 const dbUrl = process.env.ATLASDB_URL;
 
-// Handle MongoDB connection for serverless environment
-let cachedDb = null;
-
-async function connectToDatabase() {
-    if (cachedDb) {
-        return cachedDb;
-    }
-    try {
-        const client = await mongoose.connect(dbUrl, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        });
-        cachedDb = client;
-        console.log('✅ MongoDB connected successfully!');
-        return client;
-    } catch (err) {
-        console.error('MongoDB connection error:', err);
-        throw err;
-    }
-}
-
-// Connect to MongoDB
-connectToDatabase();
+mongoose.connect(dbUrl)
+  .then(() => console.log('✅ MongoDB connected successfully!'))
+  .catch(err => console.error('MongoDB connection error:', err));
 // ejs 
 app.set('view engine', 'ejs'); 
 app.set('views', path.join(__dirname, '/views')); 
@@ -97,7 +77,7 @@ app.use((err,req,res,next) => {
     res.status(status).render("error",{message});
 });
 
-// app.listen(3000, () => {
-//   console.log(`🚀 Server listening on http://localhost:${3000}`);
-// });
-module.exports = app;
+app.listen(3000, () => {
+  console.log(`🚀 Server listening on http://localhost:${3000}`);
+});
+// module.exports = app;

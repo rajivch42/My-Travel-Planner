@@ -472,9 +472,7 @@ if (confirmDeleteBtn && cancelDeleteBtn) {
         if (result.success) {
             sessionStorage.setItem('flashMessage', 'Place deleted successfully!');
             window.location.hash = 'itinerary';
-            // --- THIS IS THE FIX ---
-            // 1. Find the element to be removed
-    // 2. Reload the page to get all the fresh data
+           
         window.location.reload();
             // --- END OF FIX ---
 

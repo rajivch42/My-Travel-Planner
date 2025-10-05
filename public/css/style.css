@@ -148,17 +148,18 @@ main {
 
 /* --- 5. AUTHENTICATION PAGES --- */
 .auth-container {
+  /* display: flex; has been removed */
   width: 100%;
-  max-width: 1100px;
+  max-width: 480px; /* A much narrower width for a single form */
   background-color: var(--bg-card);
-  border-radius: var(--border-radius-main); /* Corrected variable name */
-  box-shadow: var(--shadow-medium); /* Corrected variable name */
+  border-radius: var(--border-radius-main);
+  box-shadow: var(--shadow-medium);
   overflow: hidden;
   margin: 2rem auto;
 }
 
 .auth-form-side {
-  width: 50%;
+  width: 100%; /* The form now takes up the full width of the container */
   padding: 3rem 4rem;
 }
 
@@ -262,7 +263,26 @@ main {
 .form-group-inline .form-group {
   flex: 1;
 }
+.btn-social {
+  background-color: var(--bg-card);
+  color: var(--text-dark);
+  border: 1px solid var(--border-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+}
+.btn-social:hover {
+  background-color: var(--bg-main);
+}
 
+
+/* --- THIS IS THE FIX --- */
+/* This new rule targets the image ONLY inside the social button */
+.btn-social img {
+  width: 20px;  /* Sets a small, fixed width */
+  height: 20px; /* Sets a small, fixed height */
+}
 /* --- 7. DASHBOARD --- */
 .container {
   width: 100%;
